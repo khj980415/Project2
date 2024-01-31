@@ -491,7 +491,6 @@ section .contents p {
 #sec2 .inner .contents ul li {
   display: flex;
   flex-direction: column;
-  height: 100%;
   position: relative;
   width: calc((100% - 70px) / 3);
   text-align: center;
@@ -512,6 +511,7 @@ section .contents p {
   letter-spacing: 2.16px;
 }
 #sec2 .inner .contents ul li .title p {
+  font-size: 18px;
   color: #555;
 }
 #sec2 .inner .contents ul li .title strong {

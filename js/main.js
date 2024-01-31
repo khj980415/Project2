@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	let scrollTop=0;
 	let winW=0;
 
+	let bgVideo=document.getElementById("bgVideo");
 	let header=document.getElementsByTagName("header");
 	let desktopLi=document.querySelectorAll("header #desktop ul li");
 	let mobileMune=document.getElementById("mobile");
@@ -11,6 +12,15 @@ window.addEventListener("DOMContentLoaded", function(){
 	let body=document.getElementsByTagName("body");
 	let sec2Contents=document.querySelectorAll("#sec2 .contents ul li");
 	let sec2Desc;
+
+	bgVideo.addEventListener("loadeddata", function(){
+		bgVideo.muted=true;
+		bgVideo.play();
+	});
+	
+	bgVideo.addEventListener("ended", function(){
+		bgVideo.play();
+	});
 
 	function tabRemove(){ 
 		tabBtn.classList.remove("active");

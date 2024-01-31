@@ -577,7 +577,6 @@ section {
             li {
                 display: flex;
                 flex-direction: column;
-                height: 100%;
                 position: relative;
                 width: calc((100% - 70px)/3);
                 text-align: center;
@@ -598,6 +597,7 @@ section {
                         letter-spacing: 2.16px;
     
                         p {
+                            font-size: 18px;
                             color: #555;
                         }
     
