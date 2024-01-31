@@ -1,0 +1,44 @@
+// var
+
+$section-bg: #F4F3EF;
+
+$header-point-color: #765040;
+// mixin
+
+@mixin highlight {
+    content: "";
+    position: absolute;
+    background-color: #C2C8AD;
+    width: 120%;
+    height: 20px;
+    z-index: -1;
+}
+
+@mixin button-style {
+    line-height: 50px;
+    padding: 0 100px;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    border: #fff solid 1px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+@mixin button-style-hover {
+    border: transparent solid 1px;
+    color: #000;
+    mix-blend-mode: lighten;
+    background-color: #fff;
+    font-weight: 800;
+}
+
+@mixin start-line {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 25vh;
+    background-color: #fff;
+}
