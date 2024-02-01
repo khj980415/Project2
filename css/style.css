@@ -1008,7 +1008,7 @@ footer .inner .right ul li:hover a {
   box-sizing: border-box;
   transition: 0.3s;
 }
-.to_top a.active {
+.to_top a.fixed {
   right: 1.25em;
 }
 
