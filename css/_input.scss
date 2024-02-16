@@ -42,3 +42,14 @@ $header-point-color: #765040;
     height: 25vh;
     background-color: #fff;
 }
+
+@mixin active-animationY {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@mixin active-animationX {
+    opacity: 1;
+    transform: translateX(0);
+}

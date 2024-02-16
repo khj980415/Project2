@@ -1,18 +1,28 @@
 window.addEventListener("DOMContentLoaded", function(){
-	let scrollTop=0;
-	let winW=0;
-
 	let bgVideo=document.getElementById("bgVideo");
 	let header=document.getElementsByTagName("header");
 	let desktopLi=document.querySelectorAll("header #desktop ul li");
-	let mobileMune=document.getElementById("mobile");
+	let mobileMenu=document.getElementById("mobile");
+	let mobileLi=mobileMenu.firstElementChild.children;
 	let topBtn=document.querySelector(".to_top a");
 	let tabBtn=document.querySelector("header .tab");
 	let dim=document.querySelector(".dim");
-	let body=document.getElementsByTagName("body");
 	let sec2Contents=document.querySelectorAll("#sec2 .contents ul li");
 	let sec2Desc;
+	let start=this.document.getElementById("start");
+	let section=document.querySelectorAll("section");
+	let pageList=[];
+	pageList[0]=start;
 
+	for(let i=0; i<section.length; i++){
+		pageList.push(section[i]);
+	}
+
+	let scrollTop=0;
+	let winW=0;
+	let targety=0;
+	let n=0;
+	
 	bgVideo.addEventListener("loadeddata", function(){
 		bgVideo.muted=true;
 		bgVideo.play();
@@ -24,9 +34,9 @@ window.addEventListener("DOMContentLoaded", function(){
 
 	function tabRemove(){ 
 		tabBtn.classList.remove("active");
-		mobileMune.classList.remove("active");
+		mobileMenu.classList.remove("active");
 		dim.classList.remove("active");
-		body.item(0).classList.remove("fixed");
+		document.body.classList.remove("fixed");
 	}
 
 	function headerActive(){
@@ -52,16 +62,80 @@ window.addEventListener("DOMContentLoaded", function(){
 
 	const trigger=new ScrollTrigger.default({
 		trigger: {
+			once: true,
+			offset: {
+				viewport: {
+					x: 0,
+					y: 0.25 // 윈도우 3/4 지점에서 발생
+				}
+			},
 			toggle: {
 				class: {
 					in: "active",
 					out: "inactive"
 				}
 			}
+		},
+		scroll: {
+			callback: offset => scrollInteraction(offset.y)
 		}
 	});
 	
 	trigger.add("#start, #sec1, #sec2, #sec3, #sec4, #sec5");
+
+	function scrollInteraction(t){
+		if( t < pageList[1].offsetTop){
+			n=0;
+		}
+		else if ( t < pageList[2].offsetTop){
+			n=1;
+		}
+		else if ( t < pageList[3].offsetTop){
+			n=2;
+		}
+		else if ( t < pageList[4].offsetTop){
+			n=3;
+		}
+		else if ( t < pageList[5].offsetTop){
+			n=4;
+			if( window.innerHeight+t === document.body.scrollHeight){
+				n=5;
+			}
+		}
+		else {
+			n=5;
+		}
+		
+		for(let i=0; i<desktopLi.length; i++){
+			if (i === n){
+				if(!desktopLi[i].classList.contains("active")){
+					desktopLi[i].classList.add("active");
+				}
+				
+			}
+			else {
+				if(desktopLi[i].classList.contains("active")){
+				desktopLi[i].classList.remove("active");
+				}
+			}
+		}
+	}
+
+	for(let i=0; i<desktopLi.length; i++){
+		desktopLi[i].addEventListener("click", function(e){
+			e.preventDefault();
+			targety=pageList[i].offsetTop;
+			gsap.to(window, {scrollTo: targety, duration: 0.5});
+		});
+	}
+	for(let i=0; i<mobileLi.length; i++){
+		mobileLi[i].addEventListener("click", function(e){
+			e.preventDefault();
+			targety=pageList[i].offsetTop;
+			gsap.to(window, {scrollTo: targety, duration: 0.5});
+			tabRemove();
+		});
+	}
 
 	window.addEventListener("resize", function(){
 		winW=window.innerWidth;
@@ -127,9 +201,9 @@ window.addEventListener("DOMContentLoaded", function(){
 		e.preventDefault();
 		if(!e.currentTarget.classList.contains("active")){
 		e.currentTarget.classList.add("active");
-		mobileMune.classList.add("active");
+		mobileMenu.classList.add("active");
 		dim.classList.add("active");
-		body.item(0).classList.add("fixed");
+		document.body.classList.add("fixed");
 		}
 		else{
 			tabRemove();
